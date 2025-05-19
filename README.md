@@ -1,1 +1,1 @@
-# JavaScript-seminar-
+# JavaScript-seminar
