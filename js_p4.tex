@@ -1,0 +1,224 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Definición del lenguaje JavaScript para listings
+\lstdefinelanguage{JavaScript}{
+  keywords={break, case, catch, class, const, continue, debugger, default, delete, do, else, export, extends, false, finally, for, function, if, import, in, instanceof, new, null, return, super, switch, this, throw, true, try, typeof, var, void, while, with, let, static, yield},
+  keywordstyle=\color{blue},
+  ndkeywords={await, async},
+  ndkeywordstyle=\color{blue},
+  sensitive=true,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{gray},
+  stringstyle=\color{red},
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{gray},
+  showstringspaces=false,
+  frame=single,
+  breaklines=true,
+  literate=
+  {á}{{\'a}}1
+  {é}{{\'e}}1 
+  {í}{{\'\i}}1 
+  {ó}{{\'o}}1 
+  {ú}{{\'u}}1 
+  {ñ}{{\~n}}1
+}
+
+\begin{document}
+
+\title{Características que hacen a JavaScript orientado a objetos}
+\author{}
+\date{}
+\maketitle
+
+% \section*{Respuesta}
+
+
+
+% \section*{Modelos sin clases}
+
+% Existen varios lenguajes que implementan POO sin recurrir a clases tradicionales, utilizando en su lugar \emph{prototipos} o \emph{mensajes}:
+
+% \begin{itemize}
+%   \item \textbf{JavaScript (pre-ES6):} Usa prototipos para herencia y creación de objetos, sin sintaxis de \lstinline|class|.
+%   \item \textbf{Self:} Lenguaje puramente basado en prototipos, sin clases.
+%   \item \textbf{Lua:} Se apoya en tablas y metatables para simular objetos y herencia.
+%   \item \textbf{Io:} Sistema de objetos basado en envío de mensajes, sin clases.
+% \end{itemize}
+
+% \section*{Conclusión}
+
+% Las \emph{clases} son solo un mecanismo de azúcar sintáctico para generar y organizar objetos. Un lenguaje es orientado a objetos si ofrece herramientas para crear y manipular objetos, independientemente de si utiliza clases o prototipos.
+
+
+\section*{Introducción}
+
+\subsection*{¿Es necesario tener clases para ser orientado a objetos?}
+
+No es indispensable que un lenguaje disponga de \emph{clases} para ser considerado orientado a objetos. Lo fundamental en la Programación Orientada a Objetos (POO) son los \textbf{objetos} y los mecanismos que permiten:
+
+\begin{enumerate}
+  \item \textbf{Encapsulamiento:} Agrupar datos y comportamientos en una misma unidad.
+  \item \textbf{Abstracción:} Ocultar detalles internos y exponer una interfaz limpia.
+  \item \textbf{Herencia:} Compartir y reutilizar comportamiento entre objetos.
+  \item \textbf{Polimorfismo:} Permitir que objetos distintos respondan al mismo mensaje de formas diferentes.
+\end{enumerate}
+
+JavaScript es un lenguaje orientado a objetos que, aunque basa su modelo en prototipos en lugar de clases tradicionales, cumple plenamente con los cuatro pilares fundamentales de la Programación Orientada a Objetos (POO):
+
+\section*{JavaScript cumple cada uno de estos principios}
+
+\section{Encapsulamiento}
+
+El encapsulamiento agrupa datos y comportamientos en una única entidad: el objeto.
+
+\subsection*{Ejemplo con objeto literal}
+
+\begin{lstlisting}[language=JavaScript]
+const coche = {
+  marca: "Toyota",
+  encender: function() {
+    console.log("Coche encendido");
+  }
+};
+
+coche.encender();  // Coche encendido
+\end{lstlisting}
+
+\subsection*{Ejemplo con sintaxis de clases (ES6)}
+
+\begin{lstlisting}[language=JavaScript]
+class Coche {
+  constructor(marca) {
+    this.marca = marca;
+  }
+  encender() {
+    console.log(`${this.marca} encendido`);
+  }
+}
+\end{lstlisting}
+
+\section{Abstracción}
+
+La abstracción oculta la complejidad interna y muestra solo lo necesario.
+
+\subsection*{Campos privados (ES2022)}
+
+\begin{lstlisting}[language=JavaScript]
+class Cuenta {
+  #saldo = 0; // propiedad privada
+
+  depositar(cantidad) {
+    if (cantidad > 0) this.#saldo += cantidad;
+  }
+
+  verSaldo() {
+    return this.#saldo;
+  }
+}
+
+const c = new Cuenta();
+c.depositar(100);
+console.log(c.verSaldo()); // 100
+// c.#saldo -> Error: campo privado
+\end{lstlisting}
+
+\section{Herencia}
+
+JavaScript implementa herencia prototípica; desde ES6 también soporta sintaxis de clases.
+
+\subsection*{Herencia prototípica}
+
+\begin{lstlisting}[language=JavaScript]
+function Animal(nombre) {
+  this.nombre = nombre;
+}
+Animal.prototype.hablar = function() {
+  console.log(`${this.nombre} hace un sonido`);
+};
+
+function Perro(nombre) {
+  Animal.call(this, nombre);
+}
+Perro.prototype = Object.create(Animal.prototype);
+Perro.prototype.ladrar = function() {
+  console.log(`${this.nombre} ladra`);
+};
+
+const firulais = new Perro("Firulais");
+firulais.hablar();  // Firulais hace un sonido
+firulais.ladrar();  // Firulais ladra
+\end{lstlisting}
+
+\subsection*{Herencia con clases (ES6)}
+
+\begin{lstlisting}[language=JavaScript]
+class Animal {
+  constructor(nombre) {
+    this.nombre = nombre;
+  }
+  hablar() {
+    console.log(`${this.nombre} hace un sonido`);
+  }
+}
+
+class Perro extends Animal {
+  ladrar() {
+    console.log(`${this.nombre} ladra`);
+  }
+}
+\end{lstlisting}
+
+\section{Polimorfismo}
+
+El polimorfismo permite que distintos objetos respondan al mismo método de maneras diferentes.
+
+\begin{lstlisting}[language=JavaScript]
+class Animal {
+  hablar() {
+    console.log("Sonido genérico");
+  }
+}
+
+class Gato extends Animal {
+  hablar() {
+    console.log("Miau");
+  }
+}
+
+class Perro extends Animal {
+  hablar() {
+    console.log("Guau");
+  }
+}
+
+const animales = [new Gato(), new Perro()];
+animales.forEach(animal => animal.hablar());
+// Miau
+// Guau
+\end{lstlisting}
+
+\section*{Otras características relacionadas}
+
+\begin{itemize}
+  \item \textbf{Funciones de primera clase:} métodos son funciones que pueden pasarse como argumentos.
+  \item \textbf{Objetos dinámicos:} se pueden modificar (agregar/quitar propiedades) en tiempo de ejecución.
+  \item \textbf{Closures:} permiten emular encapsulamiento privado antes de los campos \texttt{\#private}.
+\end{itemize}
+
+\section*{Conclusión}
+
+JavaScript cumple con los principios de la POO gracias a su modelo de objetos basado en prototipos y, desde ES6, con sintaxis de clases y campos privados. Aunque no usara clases originalmente, incorpora todos los pilares fundamentales de la programación orientada a objetos.
+
+\end{document}

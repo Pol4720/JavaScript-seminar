@@ -1,0 +1,121 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\begin{document}
+
+\title{Adiciones al lenguaje JavaScript desde ES6}
+\author{}
+\date{}
+\maketitle
+
+\section*{Descripción breve por versión}
+
+\begin{itemize}
+  \item \textbf{ES6 (2015):} Introdujo sintaxis moderna como \texttt{let}, \texttt{const}, arrow functions, clases y herencia con \texttt{class}/\texttt{extends}, módulos (\texttt{import}/\texttt{export}), promesas, estructuras de datos \texttt{Map} y \texttt{Set}, template literals, destructuring, parámetros por defecto, spread/rest, símbolos y generadores.
+  \item \textbf{ES7 (2016):} Añadió el método \texttt{Array.prototype.includes()} y el operador de exponenciación (\texttt{**}).
+  \item \textbf{ES8 (2017):} Incorporó \texttt{async}/\texttt{await} para asincronía, mejoras en \texttt{Object.entries()} y \texttt{Object.values()}, y métodos de padding en strings (\texttt{padStart()}, \texttt{padEnd()}).
+  \item \textbf{ES9 (2018):} Agregó rest/spread en objetos, el método \texttt{Promise.prototype.finally()} y mejoras en expresiones regulares.
+  \item \textbf{ES10 (2019):} Introdujo \texttt{Array.prototype.flat()}, \texttt{flatMap()}, \texttt{Object.fromEntries()}, \texttt{trimStart()} y \texttt{trimEnd()}, además de \texttt{Symbol.description}.
+  \item \textbf{ES11 (2020):} Implementó optional chaining (\texttt{?.}), nullish coalescing (\texttt{??}), \texttt{Promise.\allowbreak allSettled()} y carga dinámica de módulos (\texttt{import()}).
+  \item \textbf{ES12 (2021):} Añadió operadores de asignación lógica (\texttt{\&\&=}, \texttt{\textbar\textbar=}, \texttt{??=}), \texttt{String.prototype.replaceAll()} y separadores numéricos.
+  \item \textbf{ES13 (2022):} Presentó campos privados en clases (\texttt{\#campo}), métodos privados/estáticos y top-level \texttt{await} en módulos.
+  \item \textbf{ES14 (2023):} Sumó métodos inmutables para arrays (\texttt{toSorted()}, \texttt{toReversed()}, \texttt{toSpliced()}), nuevas utilidades en \texttt{Set}/\texttt{Map} como \texttt{groupBy}, y \texttt{Symbol.dispose} con la sintaxis \texttt{using}.
+\end{itemize}
+
+\section*{Tabla comparativa de adiciones}
+\small
+\begin{longtable}{@{}lll@{}}
+    \caption*{Principales adiciones de ECMAScript desde ES6 hasta ES14} \\
+    \toprule
+    \textbf{Versión} & \textbf{Año} & \textbf{Principales características} \\
+    \midrule
+    \endhead
+    \midrule
+    ES6  & 2015 & \begin{minipage}[t]{0.7\linewidth}
+               \begin{itemize}
+                 \item \texttt{let}, \texttt{const}
+                 \item Arrow functions (\texttt{()=>})
+                 \item Clases y herencia (\texttt{class}/\texttt{extends})
+                 \item Módulos (\texttt{import}/\texttt{export})
+                 \item Promesas
+                 \item \texttt{Map}, \texttt{Set}
+                 \item Template literals, destructuring
+                 \item Parámetros por defecto, spread/rest
+                 \item Símbolos (\texttt{Symbol})
+                 \item Generadores (\texttt{function*})
+               \end{itemize}
+             \end{minipage} \\
+    \addlinespace
+    ES7  & 2016 & \begin{minipage}[t]{0.7\linewidth}
+               \begin{itemize}
+                 \item \texttt{Array.prototype.includes()}
+                 \item Operador de exponenciación (\texttt{**})
+               \end{itemize}
+             \end{minipage} \\
+    \addlinespace
+    ES8  & 2017 & \begin{minipage}[t]{0.7\linewidth}
+               \begin{itemize}
+                 \item \texttt{async}/\texttt{await}
+                 \item \texttt{Object.entries()}, \texttt{Object.values()}
+                 \item \texttt{String.prototype.padStart()}, \texttt{padEnd()}
+               \end{itemize}
+             \end{minipage} \\
+    \addlinespace
+    ES9  & 2018 & \begin{minipage}[t]{0.7\linewidth}
+               \begin{itemize}
+                 \item Rest/spread en objetos
+                 \item \texttt{Promise.prototype.finally()}
+                 \item Mejoras en expresiones regulares
+               \end{itemize}
+             \end{minipage} \\
+    \addlinespace
+    ES10 & 2019 & \begin{minipage}[t]{0.7\linewidth}
+               \begin{itemize}
+                 \item \texttt{Array.prototype.flat()}, \texttt{flatMap()}
+                 \item \texttt{Object.fromEntries()}
+                 \item \texttt{String.prototype.trimStart()}, \texttt{trimEnd()}
+                 \item \texttt{Symbol.description}
+               \end{itemize}
+             \end{minipage} \\
+    \addlinespace
+    ES11 & 2020 & \begin{minipage}[t]{0.7\linewidth}
+               \begin{itemize}
+                 \item Optional chaining (\texttt{?.})
+                 \item Nullish coalescing (\texttt{??})
+                 \item \texttt{Promise.allSettled()}
+                 \item Import dinámico (\texttt{import()})
+               \end{itemize}
+             \end{minipage} \\
+    \addlinespace
+    ES12 & 2021 & \begin{minipage}[t]{0.7\linewidth}
+               \begin{itemize}
+                 \item Operadores de asignación lógica (\texttt{\&\&=}, \texttt{\textbar\textbar=}, \texttt{??=})
+                 \item \texttt{String.prototype.replaceAll()}
+                 \item Separadores numéricos (\texttt{1\_000\_000})
+               \end{itemize}
+             \end{minipage} \\
+    \addlinespace
+    ES13 & 2022 & \begin{minipage}[t]{0.7\linewidth}
+               \begin{itemize}
+                 \item Campos privados (\texttt{\#campo})
+                 \item Métodos privados y estáticos
+                 \item Top-level \texttt{await}
+               \end{itemize}
+             \end{minipage} \\
+    \addlinespace
+    ES14 & 2023 & \begin{minipage}[t]{0.7\linewidth}
+               \begin{itemize}
+                 \item \texttt{toSorted()}, \texttt{toReversed()}, \texttt{toSpliced()}
+                 \item \texttt{Set/Map.groupBy}
+                 \item \texttt{Symbol.dispose}, \texttt{using}
+               \end{itemize}
+             \end{minipage} \\
+\end{longtable}
+
+\end{document}
